@@ -3,6 +3,10 @@ String::capitalizeAllWords = ->
     a.toUpperCase()
 
 employeeHTML = ""
+
+employees = [];
+
+
 employeeImage = null
 
 employeeName = null
@@ -28,6 +32,7 @@ displayRandomUser = ->
         employeeEmail =  data.results[0].email
 
         employeeLocation = data.results[0].location.city.capitalizeAllWords()
+        employees.push(data.results[0])
         console.log( data.results[0])
         employeeHTML += "<div class=\"employee\"><img class=\"employee-image\" src=\"#{employeeImage}\">
             <div class=\"employee-info\"><h2 class=\"employee-name\">#{employeeName}</h2>
@@ -36,7 +41,7 @@ displayRandomUser = ->
         </div>"
         $("#employees").html(employeeHTML)
 
-        $('.employee').on 'click touchstart', ->
+        $('.employee').on 'click touchstart',(event) ->
             showPopUp = (picture, name, email, simpleLocation, phoneNumber,street, state, postCode, birthday) ->
                 popUpHTML = "
             <button id=\"exitPopup\">X</button>
@@ -62,8 +67,11 @@ displayRandomUser = ->
                     $("#popupContainer").fadeOut(300)
                     alert("Exit Popup")
                     )
+            currentEmployeeData = employees[$(".employee").index(event.target)]
+            console.log(currentEmployeeData)
 
-            showPopUp(employeeImage, employeeName, employeeEmail, employeeLocation,  data.results[0].cell,data.results[0].location.street, data.results[0].location,data.results[0].state, data.results[0].location.postcode, data.results[0].dob.date)
+            showPopUp(currentEmployeeData.picture.large,currentEmployeeData.name.first + " " + currentEmployeeData .name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell,currentEmployeeData.location.street.capitalizeAllWords(),currentEmployeeData.location.state.capitalizeAllWords(),currentEmployeeData.location.postcode, currentEmployeeData.dob.date
+            )
 
 
 
