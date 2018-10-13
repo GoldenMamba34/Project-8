@@ -37,8 +37,8 @@ displayRandomUser = ->
         $("#employees").html(employeeHTML)
 
         $('.employee').on 'click touchstart', ->
-          showPopUp = (picture, name, email, simpleLocation, phoneNumber,street, state, postCode)->
-            popUpHTML = "
+            showPopUp = (picture, name, email, simpleLocation, phoneNumber,street, state, postCode, birthday) ->
+                popUpHTML = "
             <button id=\"exitPopup\">X</button>
             <img src=\"#{picture}\" class=\"popup-Image\">
             <h2 class=\"popup-name\">#{name}</h2>
@@ -49,8 +49,26 @@ displayRandomUser = ->
             <p class=\"popup-location\">#{street}, #{state}, #{postCode}</p>
             <p class=\"popup-birthday\">Birthday: #{birthday}</p>
             "
-            $("#popupContainer").html(popUpHTML)
-            showPopUp(employeeImage, employeeName, employeeEmail, employeeLocation,  data.results[0].cell,data.results[0].location.street, data.results[0].location,data.results[0].state, data.results[0].location.postcode)
+                $("#popupContainer").html(popUpHTML)
+                $("#popupContainer").fadeIn(300)
+                $("#overlay").fadeIn(300)
+            $("#overlay").on("click touchstart",(event)->
+                if event.target.id is 'overlay'
+                    $("#overlay").fadeOut(300)
+                    $("#popupContainer").fadeOut(300)
+                    )
+            $("#exitPopup").on("click touchstart", ->
+                    $("#overlay").fadeOut(300)
+                    $("#popupContainer").fadeOut(300)
+                    alert("Exit Popup")
+                    )
+
+            showPopUp(employeeImage, employeeName, employeeEmail, employeeLocation,  data.results[0].cell,data.results[0].location.street, data.results[0].location,data.results[0].state, data.results[0].location.postcode, data.results[0].dob.date)
+
+
+
+
+
 
 
 

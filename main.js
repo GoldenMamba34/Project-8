@@ -39,12 +39,25 @@ displayRandomUser = function() {
     $("#employees").html(employeeHTML);
     $('.employee').on('click touchstart', function() {
       var showPopUp;
-      return showPopUp = function(picture, name, email, simpleLocation, phoneNumber, street, state, postCode) {
+      showPopUp = function(picture, name, email, simpleLocation, phoneNumber, street, state, postCode, birthday) {
         var popUpHTML;
         popUpHTML = `<button id="exitPopup">X</button> <img src="${picture}" class="popup-Image"> <h2 class="popup-name">${name}</h2> <a href="mailto:${email}" class="popup-email">${email}</a> <p class="popup-simpleLocation">${simpleLocation}</p> <hr> <a href="tel:${phoneNumber}">${phoneNumber}</a> <p class="popup-location">${street}, ${state}, ${postCode}</p> <p class="popup-birthday">Birthday: ${birthday}</p>`;
         $("#popupContainer").html(popUpHTML);
-        return showPopUp(employeeImage, employeeName, employeeEmail, employeeLocation, data.results[0].cell, data.results[0].location.street, data.results[0].location, data.results[0].state, data.results[0].location.postcode);
+        $("#popupContainer").fadeIn(300);
+        return $("#overlay").fadeIn(300);
       };
+      $("#overlay").on("click touchstart", function(event) {
+        if (event.target.id === 'overlay') {
+          $("#overlay").fadeOut(300);
+          return $("#popupContainer").fadeOut(300);
+        }
+      });
+      $("#exitPopup").on("click touchstart", function() {
+        $("#overlay").fadeOut(300);
+        $("#popupContainer").fadeOut(300);
+        return alert("Exit Popup");
+      });
+      return showPopUp(employeeImage, employeeName, employeeEmail, employeeLocation, data.results[0].cell, data.results[0].location.street, data.results[0].location, data.results[0].state, data.results[0].location.postcode, data.results[0].dob.date);
     });
   };
   fetch(url).then(handleErrors).then(parseJSON).then(updateProfile);
