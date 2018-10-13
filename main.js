@@ -37,10 +37,10 @@ displayRandomUser = function() {
     employeeEmail = data.results[0].email;
     employeeLocation = data.results[0].location.city.capitalizeAllWords();
     employees.push(data.results[0]);
-    console.log(data.results[0]);
+    // console.log( data.results[0])
     employeeHTML += `<div class="employee"><img class="employee-image" src="${employeeImage}"> <div class="employee-info"><h2 class="employee-name">${employeeName}</h2> <a class="employee-email" href="mailto:${employeeEmail}">${employeeEmail}</a> <p class="employee-location">${employeeLocation}</p>    </div> </div>`;
     $("#employees").html(employeeHTML);
-    $('.employee').on('click touchstart', function(event) {
+    $('.employee, .employee *').on('click touchstart', function(event) {
       var currentEmployeeData, showPopUp;
       showPopUp = function(picture, name, email, simpleLocation, phoneNumber, street, state, postCode, birthday) {
         var popUpHTML;
@@ -62,7 +62,7 @@ displayRandomUser = function() {
       });
       currentEmployeeData = employees[$(".employee").index(event.target)];
       console.log(currentEmployeeData);
-      return showPopUp(currentEmployeeData.picture.large, currentEmployeeData.name.first + " " + currentEmployeeData.name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell, currentEmployeeData.location.street.capitalizeAllWords(), currentEmployeeData.location.state.capitalizeAllWords(), currentEmployeeData.location.postcode, currentEmployeeData.dob.date);
+      return showPopUp(currentEmployeeData.picture.large, currentEmployeeData.name.first + " " + currentEmployeeData.name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell, currentEmployeeData.location.street.capitalizeAllWords(), currentEmployeeData.location.state.capitalizeAllWords(), currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US'));
     });
   };
   fetch(url).then(handleErrors).then(parseJSON).then(updateProfile);
@@ -71,5 +71,4 @@ displayRandomUser = function() {
 
 for (i = j = 0; j <= 12; i = ++j) {
   displayRandomUser();
-  console.log("displayRandomUser");
 }

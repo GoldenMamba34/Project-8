@@ -33,7 +33,7 @@ displayRandomUser = ->
 
         employeeLocation = data.results[0].location.city.capitalizeAllWords()
         employees.push(data.results[0])
-        console.log( data.results[0])
+        # console.log( data.results[0])
         employeeHTML += "<div class=\"employee\"><img class=\"employee-image\" src=\"#{employeeImage}\">
             <div class=\"employee-info\"><h2 class=\"employee-name\">#{employeeName}</h2>
             <a class=\"employee-email\" href=\"mailto:#{employeeEmail}\">#{employeeEmail}</a>
@@ -41,8 +41,9 @@ displayRandomUser = ->
         </div>"
         $("#employees").html(employeeHTML)
 
-        $('.employee').on 'click touchstart',(event) ->
+        $('.employee, .employee *').on 'click touchstart',(event) ->
             showPopUp = (picture, name, email, simpleLocation, phoneNumber,street, state, postCode, birthday) ->
+
                 popUpHTML = "
             <button id=\"exitPopup\">X</button>
             <img src=\"#{picture}\" class=\"popup-Image\">
@@ -70,7 +71,8 @@ displayRandomUser = ->
             currentEmployeeData = employees[$(".employee").index(event.target)]
             console.log(currentEmployeeData)
 
-            showPopUp(currentEmployeeData.picture.large,currentEmployeeData.name.first + " " + currentEmployeeData .name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell,currentEmployeeData.location.street.capitalizeAllWords(),currentEmployeeData.location.state.capitalizeAllWords(),currentEmployeeData.location.postcode, currentEmployeeData.dob.date
+            showPopUp(currentEmployeeData.picture.large,currentEmployeeData.name.first + " " + currentEmployeeData .name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell,currentEmployeeData.location.street.capitalizeAllWords(),currentEmployeeData.location.state.capitalizeAllWords(),currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US')
+
             )
 
 
@@ -87,4 +89,3 @@ displayRandomUser = ->
     undefined
 for i in [0..12]
     displayRandomUser()
-    console.log("displayRandomUser")
