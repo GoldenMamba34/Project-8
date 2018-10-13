@@ -1,3 +1,9 @@
+h2 {
+    color: #585858;
+    margin: 5% 5% 2%;
+    font-size: 160%;
+}
+
 body {
     background: #FCFCFC;
 }
@@ -9,14 +15,69 @@ body {
     text-align: center;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-content: space-between;
+    justify-content: space-between;
+    align-content: flex-start;
     margin-top: 30px;
 }
 
-
 .employee {
-    border: 2px solid rgb(175,175,175);
-    margin:1%;
-    padding:10px;
+    border: 1.5px solid rgb(200,200,200);
+    margin: 1%;
+    padding: 20px 10px 20px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+      overflow-wrap: break-word;
+      transition-duration:300ms;
+}
+.employee:hover {
+transform:scale(1.05);
+
+}
+
+.employee-image {
+    border-radius: 50%;
+    width: 30%;
+    display: inline-block;
+}
+
+.employee-name {
+    color: #4B555B;
+    font-size: 120%;
+    margin: 0 0 5%;
+}
+
+.employee-email {
+    color: rgb(150,150,150);
+    margin-top: 5%;
+}
+
+.employee-location {
+    color: rgb(150,150,150);
+    margin-top: 5%;
+}
+
+.employee-info {
+    display: inline-block;
+    float: right;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 5%;
+
+}
+
+@media (min-width:320px) {
+    .employee {
+        width: 100%;
+    }
+}
+@media (min-width:768px) {
+    .employee {
+        width: calc((100% / 2) - 60px);
+    }
+}
+@media (min-width:1024px) {
+    .employee {
+        width: calc((100% / 3) - 60px);
+    }
 }
