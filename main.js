@@ -56,7 +56,10 @@ displayRandomUser = function() {
         }
       });
       currentEmployeeData = employees[$(".employee").index(event.target.className === "employee" ? event.target : $(event.target).parent())];
-      return showPopUp(currentEmployeeData.picture.large, currentEmployeeData.name.first.capitalizeAllWords() + " " + currentEmployeeData.name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell, currentEmployeeData.location.street.capitalizeAllWords(), currentEmployeeData.location.state.capitalizeAllWords(), currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US'));
+      return showPopUp(currentEmployeeData.picture.large, currentEmployeeData.name.first.capitalizeAllWords() + " " + currentEmployeeData.name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell, currentEmployeeData.location.street.capitalizeAllWords(), currentEmployeeData.location.state.capitalizeAllWords(), currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US'), $("#popupContainer").on("click touchstart", "#exitPopup", function() {
+        $("#overlay").fadeOut(300);
+        return $("#popupContainer").fadeOut(300);
+      }));
     });
   };
   fetch(url).then(handleErrors).then(parseJSON).then(updateProfile);

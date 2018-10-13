@@ -15,6 +15,8 @@ employeeEmail = null
 
 employeeLocation = null
 
+
+
 displayRandomUser = ->
     url = ' https://randomuser.me/api/ '
     handleErrors = (res) ->
@@ -63,11 +65,14 @@ displayRandomUser = ->
                     $("#overlay").fadeOut(300)
                     $("#popupContainer").fadeOut(300)
                     )
-
             currentEmployeeData = employees[$(".employee").index(if event.target.className is "employee" then event.target else $(event.target).parent())]
 
             showPopUp(currentEmployeeData.picture.large,currentEmployeeData.name.first.capitalizeAllWords() + " " + currentEmployeeData .name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell,currentEmployeeData.location.street.capitalizeAllWords(),currentEmployeeData.location.state.capitalizeAllWords(),currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US')
 
+            $("#popupContainer").on("click touchstart", "#exitPopup", ->
+                $("#overlay").fadeOut(300)
+                $("#popupContainer").fadeOut(300)
+                )
             )
 
 
