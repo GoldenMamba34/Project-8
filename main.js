@@ -40,7 +40,7 @@ displayRandomUser = function() {
     // console.log( data.results[0])
     employeeHTML += `<div class="employee"><img class="employee-image" src="${employeeImage}"> <div class="employee-info"><h2 class="employee-name">${employeeName}</h2> <a class="employee-email" href="mailto:${employeeEmail}">${employeeEmail}</a> <p class="employee-location">${employeeLocation}</p>    </div> </div>`;
     $("#employees").html(employeeHTML);
-    $('.employee, .employee *').on('click touchstart', function(event) {
+    $('.employee, .employee-image').on('click touchstart', function(event) {
       var currentEmployeeData, showPopUp;
       showPopUp = function(picture, name, email, simpleLocation, phoneNumber, street, state, postCode, birthday) {
         var popUpHTML;
@@ -60,8 +60,7 @@ displayRandomUser = function() {
         $("#popupContainer").fadeOut(300);
         return alert("Exit Popup");
       });
-      currentEmployeeData = employees[$(".employee").index(event.target)];
-      console.log(currentEmployeeData);
+      currentEmployeeData = employees[$(".employee").index(event.target.className === "employee" ? event.target : event.target.parent)];
       return showPopUp(currentEmployeeData.picture.large, currentEmployeeData.name.first + " " + currentEmployeeData.name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell, currentEmployeeData.location.street.capitalizeAllWords(), currentEmployeeData.location.state.capitalizeAllWords(), currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US'));
     });
   };

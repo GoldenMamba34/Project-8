@@ -41,7 +41,7 @@ displayRandomUser = ->
         </div>"
         $("#employees").html(employeeHTML)
 
-        $('.employee, .employee *').on 'click touchstart',(event) ->
+        $('.employee, .employee-image').on 'click touchstart',(event) ->
             showPopUp = (picture, name, email, simpleLocation, phoneNumber,street, state, postCode, birthday) ->
 
                 popUpHTML = "
@@ -68,8 +68,8 @@ displayRandomUser = ->
                     $("#popupContainer").fadeOut(300)
                     alert("Exit Popup")
                     )
-            currentEmployeeData = employees[$(".employee").index(event.target)]
-            console.log(currentEmployeeData)
+
+            currentEmployeeData = employees[$(".employee").index(if event.target.className is "employee" then event.target else event.target.parent)]
 
             showPopUp(currentEmployeeData.picture.large,currentEmployeeData.name.first + " " + currentEmployeeData .name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell,currentEmployeeData.location.street.capitalizeAllWords(),currentEmployeeData.location.state.capitalizeAllWords(),currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US')
 
