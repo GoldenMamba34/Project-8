@@ -46,12 +46,12 @@ displayRandomUser = ->
 
                 popUpHTML = "
             <button id=\"exitPopup\">X</button>
-            <img src=\"#{picture}\" class=\"popup-Image\">
+            <img src=\"#{picture}\" class=\"popup-image\">
             <h2 class=\"popup-name\">#{name}</h2>
-            <a href=\"mailto:#{email}\" class=\"popup-email\">#{email}</a>
+            <a href=\"mailto:#{email}\" class=\"popup-email employee-email\">#{email}</a>
             <p class=\"popup-simpleLocation\">#{simpleLocation}</p>
             <hr>
-            <a href=\"tel:#{phoneNumber}\">#{phoneNumber}</a>
+            <a href=\"tel:#{phoneNumber}\" class=\"popup-phoneNumber\">#{phoneNumber}</a>
             <p class=\"popup-location\">#{street}, #{state}, #{postCode}</p>
             <p class=\"popup-birthday\">Birthday: #{birthday}</p>
             "
@@ -63,24 +63,12 @@ displayRandomUser = ->
                     $("#overlay").fadeOut(300)
                     $("#popupContainer").fadeOut(300)
                     )
-            $("#exitPopup").on("click touchstart", ->
-                    $("#overlay").fadeOut(300)
-                    $("#popupContainer").fadeOut(300)
-                    alert("Exit Popup")
-                    )
 
-            currentEmployeeData = employees[$(".employee").index(if event.target.className is "employee" then event.target else event.target.parent)]
+            currentEmployeeData = employees[$(".employee").index(if event.target.className is "employee" then event.target else $(event.target).parent())]
 
-            showPopUp(currentEmployeeData.picture.large,currentEmployeeData.name.first + " " + currentEmployeeData .name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell,currentEmployeeData.location.street.capitalizeAllWords(),currentEmployeeData.location.state.capitalizeAllWords(),currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US')
+            showPopUp(currentEmployeeData.picture.large,currentEmployeeData.name.first.capitalizeAllWords() + " " + currentEmployeeData .name.last.capitalizeAllWords(), currentEmployeeData.email, currentEmployeeData.location.city.capitalizeAllWords(), currentEmployeeData.cell,currentEmployeeData.location.street.capitalizeAllWords(),currentEmployeeData.location.state.capitalizeAllWords(),currentEmployeeData.location.postcode, new Date(currentEmployeeData.dob.date).toLocaleDateString('en-US')
 
             )
-
-
-
-
-
-
-
 
 
         return

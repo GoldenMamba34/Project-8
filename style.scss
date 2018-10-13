@@ -6,6 +6,7 @@ h2 {
 
 body {
     background: #FCFCFC;
+    font-family: Arial, san-serif;
 }
 
 #employees {
@@ -21,7 +22,7 @@ body {
 }
 
 .employee {
-    border: 1.5px solid rgb(200,200,200);
+    border: 1.5px solid rgb(200, 200, 200);
     margin: 1%;
     padding: 20px 10px 20px 20px;
     border-radius: 10px;
@@ -48,12 +49,13 @@ body {
 }
 
 .employee-email {
-    color: rgb(150,150,150);
+    color: rgb(150, 150, 150);
     margin-top: 5%;
+    text-decoration: none;
 }
 
 .employee-location {
-    color: rgb(150,150,150);
+    color: rgb(150, 150, 150);
     margin-top: 5%;
 }
 
@@ -65,8 +67,6 @@ body {
     margin-left: 5%;
 }
 
-
-
 #overlay {
     position: fixed;
     display: none;
@@ -76,59 +76,87 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2;
     cursor: pointer;
 }
 
-
 #exitPopup {
-    background:none;
-    border:none;
-    outline:none;
-    font-family:Arial, sans-serif;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: Arial, sans-serif;
     font-size: 125%;
-    transition-duration:250ms;
+    transition-duration: 250ms;
     position: relative;
-    top:10px;
-    left:10px;
+    top: 0;
+    left: 90%;
 }
 
 #exitPopup:hover {
-    transform:scale(1.4);
+    transform: scale(1.4);
 }
+
+.popup-image {
+    border-radius: 50%;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
+
+.popup-name {
+    font-size: 140%;
+    text-align: center;
+    margin-bottom: 6%;
+}
+
+hr {
+    @extend .employee-email;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+[class^="popup-"] {
+    text-align: center;
+    color: rgb(150, 150, 150);
+    display: block;
+}
+
 @media (min-width:320px) {
     .employee {
         width: 100%;
     }
     #popupContainer {
+        color: rgb(150, 150, 150);
+        padding: 2%;
         background: white;
         position: fixed;
-        width: 75%;
+        width: 71%;
         height: 90%;
         top: 5%;
         left: 12.5%;
         border-radius: 10px;
     }
 }
+
 @media (min-width:768px) {
     .employee {
         width: calc((100% / 2) - 60px);
     }
     #popupContainer {
-        width: 60%;
+        width: 56%;
         height: 80%;
         top: 10%;
         left: 20%;
     }
-
 }
+
 @media (min-width:1024px) {
     .employee {
         width: calc((100% / 3) - 60px);
     }
     #popupContainer {
-        width: 35%;
+        width: 31%;
         height: 75%;
         top: 12.5%;
         left: 32.5%;
