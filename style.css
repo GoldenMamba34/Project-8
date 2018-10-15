@@ -161,3 +161,9 @@ hr {
         left: 32.5%;
     }
 }
+
+@media (min-width: 1350px) {
+    .employee {
+        width: calc((100% / 3) - 80px);
+    }
+}
